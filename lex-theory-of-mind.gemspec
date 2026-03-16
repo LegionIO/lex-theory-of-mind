@@ -3,7 +3,7 @@
 require_relative 'lib/legion/extensions/theory_of_mind/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'legion-extensions-theory-of-mind'
+  spec.name          = 'lex-theory-of-mind'
   spec.version       = Legion::Extensions::TheoryOfMind::VERSION
   spec.authors       = ['Matthew Iverson']
   spec.email         = ['matt@legionIO.com']
@@ -17,4 +17,5 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.metadata['rubygems_mfa_required'] = 'true'
+  spec.add_development_dependency 'legion-gaia'
 end
