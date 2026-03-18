@@ -203,6 +203,20 @@ RSpec.describe Legion::Extensions::TheoryOfMind::Helpers::AgentModel do
       model.decay_beliefs
       expect(model.beliefs).not_to have_key(:weak)
     end
+
+    it 'removes stale beliefs older than STALE_BELIEF_THRESHOLD' do
+      model.update_belief(domain: :stale, content: 'old', confidence: 0.9)
+      stale_threshold = Legion::Extensions::TheoryOfMind::Helpers::Constants::STALE_BELIEF_THRESHOLD
+      model.beliefs[:stale][:updated_at] = Time.now.utc - stale_threshold - 1
+      model.decay_beliefs
+      expect(model.beliefs).not_to have_key(:stale)
+    end
+
+    it 'keeps recent beliefs even with moderate confidence' do
+      model.update_belief(domain: :fresh, content: 'new', confidence: 0.6)
+      model.decay_beliefs
+      expect(model.beliefs).to have_key(:fresh)
+    end
   end
 
   describe '#perspective' do

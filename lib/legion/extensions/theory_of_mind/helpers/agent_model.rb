@@ -94,9 +94,11 @@ module Legion
           end
 
           def decay_beliefs
+            now = Time.now.utc
             @beliefs.each do |domain, belief|
               belief[:confidence] -= Constants::BELIEF_DECAY_RATE
-              @beliefs.delete(domain) if belief[:confidence] < Constants::CONFIDENCE_THRESHOLD
+              stale = belief[:updated_at] && (now - belief[:updated_at]) > Constants::STALE_BELIEF_THRESHOLD
+              @beliefs.delete(domain) if belief[:confidence] < Constants::CONFIDENCE_THRESHOLD || stale
             end
           end
 

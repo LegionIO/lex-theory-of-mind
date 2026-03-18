@@ -3,7 +3,7 @@
 **Level 3 Leaf Documentation**
 - **Parent**: `/Users/miverso2/rubymine/legion/extensions-agentic/CLAUDE.md`
 - **Gem**: `lex-theory-of-mind`
-- **Version**: `0.1.0`
+- **Version**: `0.1.1`
 - **Namespace**: `Legion::Extensions::TheoryOfMind`
 
 ## Purpose
@@ -122,4 +122,4 @@ After processing, calls `decay_all` to age all beliefs.
 - `false_beliefs` checks content mismatch against known_truths — this is a simple string comparison, not semantic reasoning; callers supply the known_truths hash
 - `perspective` infers dimension scores from the current BDI state: epistemic from belief count/confidence, motivational from desire priorities, emotional from emotional beliefs — this is heuristic, not a direct measurement
 - `decay_all` removes empty models (no beliefs/desires/intentions remaining) to keep the tracker lean
-- `STALE_BELIEF_THRESHOLD = 3600` is defined as a constant but staleness is not yet enforced in the decay cycle — it marks intent for future implementation
+- `STALE_BELIEF_THRESHOLD = 3600` is enforced in `decay_beliefs` — beliefs with `updated_at` older than the threshold are removed regardless of confidence

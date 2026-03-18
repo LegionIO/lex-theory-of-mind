@@ -36,3 +36,6 @@ Style/Documentation:
 Layout/HashAlignment:
   EnforcedColonStyle: table
   EnforcedHashRocketStyle: table
+
+Gemspec/DevelopmentDependencies:
+  Enabled: false
